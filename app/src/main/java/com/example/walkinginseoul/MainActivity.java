@@ -5,8 +5,13 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -27,6 +32,8 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Array;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -49,13 +56,33 @@ public class MainActivity extends AppCompatActivity implements ParkAdapter.OnIte
     private MyAsyncTask myAsyncTask = new MyAsyncTask();
     ArrayList<Bundle> arrayList2;
 
+    private Boolean isFirst = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if(isFirst){
+            isFirst = false;
+
+            Intent splash = new Intent(this, SplashActivity.class);
+            startActivity(splash);
+        }
 
         mContext = this;
+
+        try {
+            PackageInfo info = getPackageManager().getPackageInfo("com.example.walkinginseoul", PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
 
         tv = findViewById(R.id.tv);
         btnGo = findViewById(R.id.btngo);
@@ -78,9 +105,15 @@ public class MainActivity extends AppCompatActivity implements ParkAdapter.OnIte
         ArrayList<Bundle> arr = new ArrayList<>();
 
         try{
-            for(int i=0; i<arrayList2.size(); i++){
-                if(arrayList2.get(i).getString("11").equals(gu)){
+            if(gu.equals("SEOUL")){
+                for(int i=0; i<arrayList2.size(); i++){
                     arr.add(arrayList2.get(i));
+                }
+            }else{
+                for(int i=0; i<arrayList2.size(); i++){
+                    if(arrayList2.get(i).getString("11").equals(gu)){
+                        arr.add(arrayList2.get(i));
+                    }
                 }
             }
         } catch (NullPointerException e){
@@ -88,22 +121,43 @@ public class MainActivity extends AppCompatActivity implements ParkAdapter.OnIte
             Log.e("eerrror", "d");
         }
 
-        // 2 : 남산도시자연공원
-        // 12 : 주소
-        // 8 : 사진
+        // 이미지 : 10 제목 : 2, 주소 : 12, 전화번호 : 13
+        // 관리부서 : 17, 개원일 : 5, 면적 : 4, 공원 개요 : 3, 오시는길 : 9
+        // 위도 : 15, 경도 : 14
 
         arrparkVO = new ArrayList<ParkVO>();
 
         for(int i=0; i<arr.size(); i++){
             parkVO = new ParkVO();
 
+            if(arr.get(i).getString("2").equals("서울숲")){
+                parkVO.setImg("https://parks.seoul.go.kr/file/info/view.do?fIdx=13154");
+                Log.e("@@@1", arr.get(i).getString("2"));
+            } else if(arr.get(i).getString("2").equals("대모산도시자연공원")){
+                parkVO.setImg("https://parks.seoul.go.kr/file/info/view.do?fIdx=17851");
+                Log.e("@@@2", arr.get(i).getString("2"));
+            } else if(arr.get(i).getString("2").equals("아차산생태공원")){
+                parkVO.setImg("https://parks.seoul.go.kr/file/info/view.do?fIdx=17852");
+                Log.e("@@@3", arr.get(i).getString("2"));
+            } else{
+                parkVO.setImg(arr.get(i).getString("10"));
+                Log.e("@@@4", arr.get(i).getString("2"));
+            }
+
+
+
             parkVO.setAddress(arr.get(i).getString("12"));
             parkVO.setTitle(arr.get(i).getString("2"));
-            parkVO.setImg(arr.get(i).getString("10"));
-            parkVO.setImg2(arr.get(i).getString("8"));
+            parkVO.setPhone(arr.get(i).getString("13"));
+            parkVO.setDepartment(arr.get(i).getString("17"));
+            parkVO.setOpenDate(arr.get(i).getString("5"));
+            parkVO.setArea(arr.get(i).getString("4"));
+            parkVO.setDetail(arr.get(i).getString("3"));
+            parkVO.setWay(arr.get(i).getString("9"));
+            parkVO.setLatitude(arr.get(i).getString("15"));
+            parkVO.setLongitude(arr.get(i).getString("14"));
 
             arrparkVO.add(parkVO);
-            Log.e("DDDDDDDD", arr.get(i).toString());
         }
 
 
@@ -118,13 +172,30 @@ public class MainActivity extends AppCompatActivity implements ParkAdapter.OnIte
 
     @Override
     public void onItemClick(View view, ParkVO parkVO) {
-        Toast.makeText(this, "오홍홍ㅇㅇ",  Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, DetailActivity.class);
+        // 이미지 : 10 제목 : 2, 주소 : 12, 전화번호 : 13
+        // 관리부서 : 17, 개원일 : 5, 면적 : 4, 공원 개요 : 3, 오시는길 : 9
+
+
+        intent.putExtra("image", parkVO.getImg());
+        intent.putExtra("title", parkVO.getTitle());
+        intent.putExtra("address", parkVO.getAddress());
+        intent.putExtra("phone", parkVO.getPhone());
+        intent.putExtra("department", parkVO.getDepartment());
+        intent.putExtra("opendate", parkVO.getOpenDate());
+        intent.putExtra("area", parkVO.getArea());
+        intent.putExtra("detail", parkVO.getDetail());
+        intent.putExtra("way", parkVO.getWay());
+        intent.putExtra("latitude", parkVO.getLatitude());
+        intent.putExtra("longitude", parkVO.getLongitude());
+
+        startActivity(intent);
     }
 
     private void spinnerSetting() {
         arrayList = new ArrayList<String>();
 
-        arrayList.add("선택");
+        arrayList.add("전체 보기");
         arrayList.add("강남구");
         arrayList.add("강동구");
         arrayList.add("강북구");
@@ -157,9 +228,8 @@ public class MainActivity extends AppCompatActivity implements ParkAdapter.OnIte
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position == 0){
-                    Toast.makeText(MainActivity.this, "자치구를 선택해주세요", Toast.LENGTH_SHORT).show();
+                    rvProcessing("SEOUL");
                 }else{
-
                     rvProcessing(arrayList.get(position));
                 }
             }
@@ -170,7 +240,6 @@ public class MainActivity extends AppCompatActivity implements ParkAdapter.OnIte
             }
         });
     }
-
 
 
 
@@ -226,7 +295,6 @@ public class MainActivity extends AppCompatActivity implements ParkAdapter.OnIte
                                 xpp.next();
                                 buffer.append(xpp.getText());
                                 buffer.append("\n");
-
                                 bundle.putString("2", xpp.getText());
                             }
                             else if(tag.equals("P_LIST_CONTENT")){
@@ -334,6 +402,14 @@ public class MainActivity extends AppCompatActivity implements ParkAdapter.OnIte
 
                                 bundle.putString("15", xpp.getText());
                             }
+                            else if(tag.equals("P_NAME")){
+                                buffer.append("관리부서 :");
+                                xpp.next();
+                                buffer.append(xpp.getText());//
+                                buffer.append("\n");
+
+                                bundle.putString("17", xpp.getText());
+                            }
                             else if(tag.equals("TEMPLATE_URL")){
                                 buffer.append("홈페이지 URL :");
                                 xpp.next();
@@ -358,8 +434,6 @@ public class MainActivity extends AppCompatActivity implements ParkAdapter.OnIte
                     }
 
                     eventType= xpp.next();
-
-
                 }
 
             } catch (Exception e) {
@@ -368,20 +442,6 @@ public class MainActivity extends AppCompatActivity implements ParkAdapter.OnIte
 
             buffer.append("파싱 끝\n");
 
-            Log.e("WWWWW@@@@@@@@2", String.valueOf(arrayList2.size()));
-            Log.e("WWWWWWWWW", String.valueOf(arrayList2.get(0)));
-            Log.e("WWWWWWWWW", String.valueOf(arrayList2.get(3)));
-            Log.e("WWWWWWWWW", String.valueOf(arrayList2.get(11)));
-            Log.e("WWWWWWWWW", String.valueOf(arrayList2.get(7)));
-
-            for(int i=0; i<arrayList2.size(); i++){
-                if(arrayList2.get(i).getString("11") != null){
-                    Log.e("강동구 스웩 : ", arrayList2.get(i).getString("11"));
-                }else{
-                    Log.e("빈칸띠", "염따");
-                }
-            }
-
             return buffer.toString();//StringBuffer 문자열 객체 반환
         }
 
@@ -389,7 +449,6 @@ public class MainActivity extends AppCompatActivity implements ParkAdapter.OnIte
         protected void onPostExecute(String s) {
             Log.e(">>", s + "\n");
             tv.setText(s);
-
         }
     }
 }
