@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements ParkAdapter.OnIte
 
     @Override
     public void onItemClick(View view, ParkVO parkVO) {
-        Toast.makeText(this, "오홍홍",  Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "오홍홍ㅇㅇ",  Toast.LENGTH_SHORT).show();
     }
 
     private void spinnerSetting() {
