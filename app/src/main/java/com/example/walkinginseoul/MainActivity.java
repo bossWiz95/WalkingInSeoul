@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements ParkAdapter.OnIte
         tv = findViewById(R.id.tv);
         btnGo = findViewById(R.id.btngo);
         spinner = findViewById(R.id.spinner);
-
+        Log.e("a", "a");
         spinnerSetting();
 
         btnGo.setOnClickListener(new View.OnClickListener() {
@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements ParkAdapter.OnIte
     // 5번 서울숲 1364번 아차산생태공원 59번 대모산도시자연공원
     private void rvProcessing(String gu) {
         ArrayList<Bundle> arr = new ArrayList<>();
-
+        Log.e("a", "a2");
         try{
             if(gu.equals("SEOUL")){
                 for(int i=0; i<arrayList2.size(); i++){
@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements ParkAdapter.OnIte
         // 위도 : 15, 경도 : 14
 
         arrparkVO = new ArrayList<ParkVO>();
-
+        Log.e("a", "a3");
         for(int i=0; i<arr.size(); i++){
             parkVO = new ParkVO();
 
@@ -221,7 +221,7 @@ public class MainActivity extends AppCompatActivity implements ParkAdapter.OnIte
         arrayList.add("은평구");
         arrayList.add("종로구");
         arrayList.add("기타");
-
+        Log.e("a", "a4");
         arrayAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, arrayList);
         spinner.setAdapter(arrayAdapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -232,6 +232,8 @@ public class MainActivity extends AppCompatActivity implements ParkAdapter.OnIte
                 }else{
                     rvProcessing(arrayList.get(position));
                 }
+
+                Log.e("a", "a6");
             }
 
             @Override
@@ -265,15 +267,15 @@ public class MainActivity extends AppCompatActivity implements ParkAdapter.OnIte
 
                 xpp.next();
                 int eventType= xpp.getEventType();
-
+                Log.e("a", "7a");
 
                 while( eventType != XmlPullParser.END_DOCUMENT ){
 
-
+                    Log.e("a", "7a2222");
                     switch( eventType ){
                         case XmlPullParser.START_DOCUMENT:
 
-
+                            Log.e("a", "7a33333");
                             buffer.append("파싱 시작...\n\n");
                             break;
                         case XmlPullParser.START_TAG:
@@ -302,7 +304,7 @@ public class MainActivity extends AppCompatActivity implements ParkAdapter.OnIte
                                 xpp.next();
                                 buffer.append(xpp.getText());//cpId
                                 buffer.append("\n");
-
+                                Log.e("a", "7a444444");
                                 bundle.putString("3", xpp.getText());
                             }
                             else if(tag.equals("AREA")){
@@ -351,7 +353,7 @@ public class MainActivity extends AppCompatActivity implements ParkAdapter.OnIte
                                 xpp.next();
                                 buffer.append(xpp.getText());//
                                 buffer.append("\n");
-                                buffer.append("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+                                Log.e("a", "766123213a");
                                 bundle.putString("9", xpp.getText());
                             }
                             else if(tag.equals("P_IMG")){
@@ -416,7 +418,7 @@ public class MainActivity extends AppCompatActivity implements ParkAdapter.OnIte
                                 buffer.append(xpp.getText());//
                                 buffer.append("\n");
                                 buffer.append("------------------------------------------------");
-
+                                Log.e("a", "7@@@@a");
                                 bundle.putString("16", xpp.getText());
                                 arrayList2.add(bundle);
                             }
@@ -434,10 +436,14 @@ public class MainActivity extends AppCompatActivity implements ParkAdapter.OnIte
                     }
 
                     eventType= xpp.next();
+
+                    Log.e("AAA", arrayList2.size() + "");
                 }
 
             } catch (Exception e) {
                 // TODO Auto-generated catch blocke.printStackTrace();
+                Log.e("asdsad", e.getMessage());
+                e.printStackTrace();
             }
 
             buffer.append("파싱 끝\n");

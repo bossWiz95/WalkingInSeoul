@@ -16,7 +16,8 @@
         <Spinner
             android:id="@+id/spinner"
             android:layout_width="match_parent"
-            android:layout_height="80dp"/>
+            android:layout_height="80dp"
+            android:fontFamily="@font/reco"/>
     </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"
