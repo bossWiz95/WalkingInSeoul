@@ -286,7 +286,6 @@ public class MainActivity extends AppCompatActivity implements ParkAdapter.OnIte
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position == 0){
                     if(mIsSpinner < 1){
-                        Toast.makeText(getApplicationContext(), "반갑습니다.", Toast.LENGTH_LONG).show();
                         mIsSpinner++;
                     }else{
                         rvProcessing("서울시 전체");
