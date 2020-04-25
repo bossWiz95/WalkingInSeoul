@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements ParkAdapter.OnIte
                 StringBuilder str = new StringBuilder();
                 str.append("서울산책하자\n\n").append("서울시자치구공원정보를 제공해줍니다! \n")
                         .append("오류나 개선사항이 있으면 아래로 연락 부탁드립니다.\n\n")
-                        .append("Author : dongbin\n\n").append("Github Address : /github.com/mdongbin\n\n")
+                        .append("Author : dongbin\n\n").append("Github Address : www.github.com/mdongbin\n\n")
                         .append("Email Address : rewgh0@gmail.com");
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
