@@ -26,6 +26,7 @@ public class SplashActivity extends AppCompatActivity {
 
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int PERMISSIONS_REQUEST_CODE = 100;
+
     String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
 
     @Override
@@ -56,11 +57,6 @@ public class SplashActivity extends AppCompatActivity {
             }
         },3000);
     }
-
-
-    //ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
-
-
 
     public boolean checkLocationServicesStatus() {
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
@@ -96,7 +92,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     // 퍼미션 가지고있는지 체크
-    void checkRunTimePermission(){
+    public void checkRunTimePermission(){
 
         // 런타임 퍼미션 처리
         // 위치 퍼미션을 가지고 있는지 체크합니다.
@@ -152,7 +148,6 @@ public class SplashActivity extends AppCompatActivity {
                     Toast.makeText(SplashActivity.this, "퍼미션이 거부되었습니다. 설정(앱 정보)에서 퍼미션을 허용해야 합니다. ", Toast.LENGTH_LONG).show();
                 }
             }
-
         }
     }
 }

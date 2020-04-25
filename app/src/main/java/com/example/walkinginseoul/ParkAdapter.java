@@ -46,12 +46,10 @@ public class ParkAdapter extends RecyclerView.Adapter<ParkAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ParkAdapter.ViewHolder holder, int position) {
         final ParkVO parkVO = list_park.get(position);
 
-
         Glide.with(mContext)
                 .load(parkVO.getImg())
                 .thumbnail(0.5f)
                 .into(holder.img_title);
-
 
         holder.txt_address.setText(parkVO.getAddress());
         holder.txt_title.setText(parkVO.getTitle());

@@ -1,7 +1,5 @@
 package com.example.walkinginseoul;
 
-import android.widget.ImageView;
-
 public class ParkVO {
     protected String img;
     protected String title;
@@ -14,10 +12,6 @@ public class ParkVO {
     protected String way;
     protected String latitude;
     protected String longitude;
-
-    // 이미지 : 10 제목 : 2, 주소 : 12, 전화번호 : 13
-    // 관리부서 : 16, 개원일 : 5, 면적 : 4, 공원 개요 : 3, 오시는길 : 9
-    // 위도 : 15, 경도 : 14
 
     public ParkVO() {}
 

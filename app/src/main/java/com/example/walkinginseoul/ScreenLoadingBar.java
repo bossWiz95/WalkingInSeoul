@@ -36,7 +36,6 @@ public class ScreenLoadingBar {
         }
 
         public ScreenLoadingBar(Handler handler, View screen, View bar) {
-
             mHandler = handler;
             initLoadingBar(screen, bar, null);
         }
@@ -45,7 +44,6 @@ public class ScreenLoadingBar {
             mHandler = handler;
             initLoadingBar(screen, bar, msg);
         }
-
 
         //region Fullscreen loading 관련
 
@@ -74,18 +72,15 @@ public class ScreenLoadingBar {
 
             //Delay 시간이 있으면 runnable을 생성하고 delay를 준다.
             if (delayed > 0) {
-
                 mDelayedShowLoading = new Runnable() {
                     @Override
                     public void run() {
-
                         mLoadingScreen.setBackgroundColor(0xdd000000);
                         mLoadingScreenBar.setVisibility(View.VISIBLE);
 
                         if(mTxtInfo != null){
                             mTxtInfo.setVisibility(View.VISIBLE);
                         }
-
                         mLoadingScreen.setVisibility(View.VISIBLE);
                     }
                 };
@@ -108,12 +103,10 @@ public class ScreenLoadingBar {
 
                 mLoadingScreen.setVisibility(View.VISIBLE);
             }
-
             mLoadingScreen.bringToFront();
         }
 
         public void show(long delayed, String info) {
-
             if(mTxtInfo != null){
                 if(info != null){
                     mTxtInfo.setText(info);
@@ -122,12 +115,10 @@ public class ScreenLoadingBar {
                     mTxtInfo.setText("");
                 }
             }
-
             show(delayed);
         }
 
         public void hide() {
-
             if(mLoadingScreen == null)
                 return;
 
@@ -163,17 +154,14 @@ public class ScreenLoadingBar {
 
             //delay로 pending되어 있는 show runnable이 있을 경우에 해당 객체 제거
             if (mDelayedShowLoading != null) {
-
                 mHandler.removeCallbacks(mDelayedShowLoading);
 
                 mDelayedShowLoading = null;
             }
-
             mLoadingScreen.setVisibility(View.GONE);
         }
 
         public boolean isShow() {
-
             if (mShowCount > 0)
                 return true;
 

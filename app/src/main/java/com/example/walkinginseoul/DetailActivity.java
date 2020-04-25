@@ -26,6 +26,7 @@ public class DetailActivity extends AppCompatActivity {
     private TextView mDetail;
     private TextView mWay;
     private Button btnShowMap;
+    private Button btnBackPress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +36,13 @@ public class DetailActivity extends AppCompatActivity {
         String[] values = {"image", "title", "address", "phone", "department",
                 "opendate", "area", "detail", "way", "latitude", "longitude"};
 
+        // API parsing Data 를 순서대로 받아와 리스트에 저장
         Intent intent = getIntent();
         for(int i=0; i< values.length; i++){
             arrayList.add(intent.getExtras().getString(values[i]));
         }
 
+        // 참조 정의
         setReference();
 
         Glide.with(this).load(arrayList.get(0)).into(mImgView);
@@ -62,6 +65,14 @@ public class DetailActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        btnBackPress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
     }
 
     private void setReference() {
@@ -75,5 +86,6 @@ public class DetailActivity extends AppCompatActivity {
         mDetail = findViewById(R.id.d_txtdetail);
         mWay = findViewById(R.id.d_txtway);
         btnShowMap = findViewById(R.id.btnShowMap);
+        btnBackPress = findViewById(R.id.btnBackPress);
     }
 }

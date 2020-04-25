@@ -39,6 +39,8 @@ public class kakaoMap extends AppCompatActivity {
     // 위경도 관련
     private GpsTracker gpsTracker;
 
+    private Button btnBackPress;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +62,14 @@ public class kakaoMap extends AppCompatActivity {
             }
         });
 
+        btnBackPress = findViewById(R.id.btnBackPress);
+        btnBackPress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         mapView = new MapView(this);
 
         ViewGroup mapViewContainer = (ViewGroup) findViewById(R.id.map_view);
@@ -73,9 +83,10 @@ public class kakaoMap extends AppCompatActivity {
         marker.setItemName(name);
         marker.setTag(0);
         marker.setMapPoint(mapPoint);
-        marker.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
-        marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
+        marker.setMarkerType(MapPOIItem.MarkerType.BluePin);
+        marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
 
+        mapView.setZoomLevel(5, true);
         mapView.addPOIItem(marker);
     }
 
@@ -87,20 +98,18 @@ public class kakaoMap extends AppCompatActivity {
         marker.setItemName("내 위치");
         marker.setTag(1);
         marker.setMapPoint(mapPoint);
-        marker.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
-        marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
+        marker.setMarkerType(MapPOIItem.MarkerType.BluePin);
+        marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
 
+        mapView.setZoomLevel(5, true);
         mapView.addPOIItem(marker);
     }
 
     private void currentGPS() {
-
-
         gpsTracker = new GpsTracker(kakaoMap.this);
 
         double latitude = gpsTracker.getLatitude();
         double longitude = gpsTracker.getLongitude();
-
 
         this.lat = latitude;
         this.lon = longitude;

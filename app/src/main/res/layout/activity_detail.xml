@@ -49,6 +49,7 @@
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:text="MAP"
+                    android:background="@color/colorWhite"
                     android:fontFamily="@font/reco"
                     android:layout_weight="1"
 
@@ -71,7 +72,7 @@
                 android:layout_gravity="center"
                 android:fontFamily="@font/reco"
 
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="40dp"
                 android:layout_marginBottom="30dp"/>
             <TextView
                 android:id="@+id/d_txtDepartment"
@@ -114,5 +115,13 @@
                 android:fontFamily="@font/reco"/>
         </LinearLayout>
     </ScrollView>
+    <Button
+        android:id="@+id/btnBackPress"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="10dp"
 
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@mipmap/back"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
