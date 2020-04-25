@@ -6,13 +6,13 @@
 ## ScreenShots
 
 ### Splash Screen
-<img src="https://user-images.githubusercontent.com/37425087/80286185-e237ab80-8764-11ea-806d-8bce47f2fea3.gif" width="300" align="left">
+<img src="https://user-images.githubusercontent.com/37425087/80286185-e237ab80-8764-11ea-806d-8bce47f2fea3.gif" width="250" align="left">
 
 ### Main Screen(1)
-<p align="center"><img src="https://user-images.githubusercontent.com/37425087/80286214-0dba9600-8765-11ea-97b1-37df0d45616e.jpg" width="300"></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/37425087/80286214-0dba9600-8765-11ea-97b1-37df0d45616e.jpg" width="250"></p>
 
 ### Main Screen(2)
-<img src="https://user-images.githubusercontent.com/37425087/80286217-10b58680-8765-11ea-81bc-33274cddeaa7.jpg" width="300" align="right">
+<img src="https://user-images.githubusercontent.com/37425087/80286217-10b58680-8765-11ea-81bc-33274cddeaa7.jpg" width="250" align="right">
 
 ### App Information
 ![3](https://user-images.githubusercontent.com/37425087/80286219-10b58680-8765-11ea-9484-52fb3112c4d6.jpg)
