@@ -6,9 +6,9 @@
 ## ScreenShots
 
 ### Splash Screen              Main Screen(1)                 Main Screen(2)
-<img src="https://user-images.githubusercontent.com/37425087/80286185-e237ab80-8764-11ea-806d-8bce47f2fea3.gif" width="250" align="left">
+<img src="https://user-images.githubusercontent.com/37425087/80286185-e237ab80-8764-11ea-806d-8bce47f2fea3.gif" width="250">
 
-<p align="center"><img src="https://user-images.githubusercontent.com/37425087/80286214-0dba9600-8765-11ea-97b1-37df0d45616e.jpg" width="250"></p>
+<center><img src="https://user-images.githubusercontent.com/37425087/80286214-0dba9600-8765-11ea-97b1-37df0d45616e.jpg" width="250"></center>
 
 <img src="https://user-images.githubusercontent.com/37425087/80286217-10b58680-8765-11ea-81bc-33274cddeaa7.jpg" width="250" align="right">
 
